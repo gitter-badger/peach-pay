@@ -1,5 +1,5 @@
-# peach-pay
-NodeJS Module for PeachPayment
+# Peach Pay
+https://img.shields.io/badge/GITTER-join%20chat-green.svg?style=flat-square
 
 #### Init
 ```
