@@ -76,34 +76,34 @@ function request(path, method, parameters)
  * Methods
  */
 var transaction = {
-    create: function (paymentId, amount)
+    create: function (data)
     {
-        if (!paymentId) throw new Error('Missing paymentId');
-        if (!amount) throw new Error('Missing amount');
+        if (!data.paymentId) throw new Error('Missing paymentId');
+        if (!data.amount) throw new Error('Missing amount');
 
-        var data = {
-            'amount': amount,
+        var body = {
+            'amount': data.amount,
             'currency': config.currency,
             'paymentType': 'CD',
         }
-        var path = '/v1/registrations/' + paymentId + '/payments';
+        var path = '/v1/registrations/' + data.paymentId + '/payments';
 
-        return request(path, 'POST', data);
+        return request(path, 'POST', body);
     },
 
-    refund: function (transactionId, amount)
+    refund: function (data)
     {
-        if (!transactionId) throw new Error('Missing transactionId');
-        if (!amount) throw new Error('Missing amount');
+        if (!data.transactionId) throw new Error('Missing transactionId');
+        if (!data.amount) throw new Error('Missing amount');
 
-        var data = {
-            'amount': amount,
+        var body = {
+            'amount': data.amount,
             'currency': config.currency,
             'paymentType': 'RF',
         }
-        var path = '/v1/payments/' + transactionId;
+        var path = '/v1/payments/' + data.transactionId;
 
-        return request(path, 'POST', data);
+        return request(path, 'POST', body);
     }
 };
 
@@ -117,7 +117,7 @@ var card = {
         if (!data.ccExpYear) throw new Error('Missing card expiry Year');
         if (!data.ccCVV) throw new Error('Missing card cvv');
 
-        var data = {
+        var body = {
             'currency': config.currency,
             'paymentBrand': data.paymentBrand,
             'card.number': data.ccNumber,
@@ -128,7 +128,7 @@ var card = {
         };
 
         var path = '/v1/registrations';
-        return request(path, 'POST', data).then(function (res)
+        return request(path, 'POST', body).then(function (res)
         {
             if (res && res.id) return res.id;
             return Promise.reject(res.result.description);
