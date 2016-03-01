@@ -7,9 +7,9 @@ var querystring = require('querystring');
 var config = {
     authentication:
     {
-        'authentication.userId': '8a8294174e735d0c014e78cf266b1794',
-        'authentication.password': 'qyyfHCN83e',
-        'authentication.entityId': '8a8294174e735d0c014e78cf26461790'
+        'authentication.userId': null,
+        'authentication.password': null,
+        'authentication.entityId': null
     },
     options:
     {
